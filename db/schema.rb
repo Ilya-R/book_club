@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627045402) do
+ActiveRecord::Schema.define(version: 20170702083647) do
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title",           default: "Название не указано",           null: false
+    t.string   "author",          default: "Автор не указан",               null: false
+    t.text     "decription",      default: "Описание не добавлено",         null: false
+    t.string   "cover_picture",   default: "/assets/images/book_title.jpg", null: false
+    t.integer  "user_id"
+    t.string   "genre",           default: "Жанр не указан",                null: false
+    t.boolean  "best_month",      default: false,                           null: false
+    t.datetime "best_month_date"
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+  end
+
+  add_index "books", ["user_id"], name: "index_books_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
