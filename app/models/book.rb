@@ -1,7 +1,8 @@
 class Book < ActiveRecord::Base
   belongs_to :user
+  has_many :comments
 
-  validates :title, :author, :description, :genre, :user, presence: true
+  validates :title, :author, :description, :genre, :user_id, presence: true
   validates :title, length: { maximum: 50 }
   validates :author, length: { maximum: 20 }
   validates :description, length: { maximum: 1000 }
