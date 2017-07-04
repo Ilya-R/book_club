@@ -6,3 +6,4 @@ class Comment < ActiveRecord::Base
   validates :body, length: { maximum: 1000, message: 'Комментарий должен быть меньше 1000 символов' }
   validates :body, uniqueness: { message: 'Нельзя оставлять одинаковые коментарии' }
 end
+

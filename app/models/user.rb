@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   has_many :books
   has_many :comments
+  has_many :book_users
+
 end
