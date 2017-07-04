@@ -1,7 +1,8 @@
 class Book < ActiveRecord::Base
   belongs_to :user
   has_many :comments
-  has_many :bookusers
+  has_many :book_users
+  has_many :book_user_ratings
 
   validates :title, :author, :description, :genre, :user_id, presence: true
   validates :title, length: { maximum: 50 }

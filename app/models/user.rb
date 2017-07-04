@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
   has_many :books
   has_many :comments
   has_many :book_users
+  has_many :book_user_ratings
 
 end
