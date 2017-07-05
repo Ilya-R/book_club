@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
         (model.user == current_user ||
             (model.try(:book).present? && model.book.user == current_user))
   end
-end
 
-#devise_parameter_sanitizer.permit(:signup, keys: [:name])
+  def can_current_user_rate?(model)
+    false if user_signed_in? &&
+        (Book_user_rating.where(user: current_user, book: model.book) == model)
+  end
+
+  def can_current_user_add?(model)
+    false if user_signed_in? &&
+        (Book_user.where(user: current_user, book: model.book, list_type: model.list_type) == model)
+  end
+end
