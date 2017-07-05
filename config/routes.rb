@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'books#main'
+  root 'books#main_page'
 
   resources :users, only: %i[show edit update] do
     delete '/book_users/:id', to: 'book_users#destroy'

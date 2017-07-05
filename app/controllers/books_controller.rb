@@ -2,10 +2,12 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
   # встроенный в девайз фильтр - посылает незалогиненного пользователя
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[show index main_page]
 
   # задаем объект @event от текущего юзера
   before_action :set_current_user_book, only: %i[edit update]
+
+  def main_page;  end
 
   def index
     @books = Book.all
@@ -22,8 +24,7 @@ class BooksController < ApplicationController
     @book = current_user.books.build
   end
 
-  def edit;
-  end
+  def edit; end
 
   def create
     @book = current_user.books.build(book_params)

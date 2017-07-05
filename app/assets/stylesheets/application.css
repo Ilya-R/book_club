@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 50px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 50px;
+    margin-bottom: 0
+}
+.powered{
+    margin-left: 2%;
+}
