@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170704143548) do
   create_table "books", force: :cascade do |t|
     t.string   "title",           default: "Название не указано",           null: false
     t.string   "author",          default: "Автор не указан",               null: false
-    t.text     "decription",      default: "Описание не добавлено",         null: false
+    t.text     "description",      default: "Описание не добавлено",         null: false
     t.string   "cover_picture",   default: "/assets/images/book_title.jpg", null: false
     t.integer  "user_id"
     t.string   "genre",           default: "Жанр не указан",                null: false

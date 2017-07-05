@@ -1,36 +1,40 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show]
 
-  # GET /books
+  # встроенный в девайз фильтр - посылает незалогиненного пользователя
+  before_action :authenticate_user!, except: %i[show index]
+
+  # задаем объект @event от текущего юзера
+  before_action :set_current_user_book, only: %i[edit update]
+
   def index
     @books = Book.all
   end
 
-  # GET /books/1
   def show
+    @new_comment = @book.comments.build(params[:comment])
+    @book_rating = @book.book_user_ratings.build(params[:book_user_rating])
+    @book_list = @book.book_users.build(params[:book_user])
   end
 
   # GET /books/new
   def new
-    @book = Book.new
+    @book = current_user.books.build
   end
 
-  # GET /books/1/edit
-  def edit
+  def edit;
   end
 
-  # POST /books
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
 
     if @book.save
-      redirect_to @book, notice: 'Book was successfully created.'
+      redirect_to @book, notice: 'Книга была успешно добавлена'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /books/1
   def update
     if @book.update(book_params)
       redirect_to @book, notice: 'Book was successfully updated.'
@@ -39,20 +43,17 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /books/1
-  def destroy
-    @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'
+  private
+
+  def set_book
+    @book = Book.find(params[:id])
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  def book_params
+    params.require(:book).permit(:title, :author, :decription, :cover_picture, :genre)
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def book_params
-      params.require(:book).permit(:index, :edit, :show, :create, :update)
-    end
+  def set_current_user_book
+    @book = current_user.books.find(params[:id])
+  end
 end

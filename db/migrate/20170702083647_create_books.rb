@@ -3,7 +3,7 @@ class CreateBooks < ActiveRecord::Migration
     create_table :books do |t|
       t.string :title, null: false, default: 'Название не указано'
       t.string :author, null: false, default: 'Автор не указан'
-      t.text :decription, null: false, default: 'Описание не добавлено'
+      t.text :description, null: false, default: 'Описание не добавлено'
       t.string :cover_picture, null: false, default: "/assets/images/book_title.jpg"
       t.references :user, index: true, foreign_key: true
       t.string :genre, null: false, default: 'Жанр не указан'
