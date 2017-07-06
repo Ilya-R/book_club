@@ -7,7 +7,9 @@ class BooksController < ApplicationController
   # задаем объект @event от текущего юзера
   before_action :set_current_user_book, only: %i[edit update]
 
-  def main_page;  end
+  def main_page
+    @club_choice = set_club_main_book
+  end
 
   def index
     @books = Book.all
@@ -24,7 +26,8 @@ class BooksController < ApplicationController
     @book = current_user.books.build
   end
 
-  def edit; end
+  def edit;
+  end
 
   def create
     @book = current_user.books.build(book_params)
@@ -57,4 +60,32 @@ class BooksController < ApplicationController
   def set_current_user_book
     @book = current_user.books.find(params[:id])
   end
+
+  def set_club_main_book
+
+    book_with_scores_hash = {}
+
+    Books.all.each do |book|
+      score_array = []
+      book.book_user_ratings.all.each {|rating| score_array << rating.rating }
+
+      b = 0
+      average = (score_array.each {|i| b += i}) / score_array.size
+      score = (book.book_user_ratings.size + book.comments.size) * average
+
+      book_with_scores_hash[book] = score
+    end
+
+    max_value = 0
+    book_with_scores_hash.each_value {|value| max_value = value if value >> max_value}
+
+    book_with_scores_hash.index(max_value)
+  end
+
+  #При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.
+  # Если несколько книг имеют одинаковый балл, выбирается та, которая добавлена позже всего.
+  # Если и это одинаково, то книга выбирается случайно из набравших высший балл.
+  #    В конкурсе учавствуют только книги с обложкой.
+  #      Должно считаться раз в месяц.
 end
+
