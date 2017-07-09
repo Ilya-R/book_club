@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20170704143548) do
   add_index "book_users", ["user_id"], name: "index_book_users_on_user_id"
 
   create_table "books", force: :cascade do |t|
-    t.string   "title",           default: "Название не указано",           null: false
-    t.string   "author",          default: "Автор не указан",               null: false
-    t.text     "description",      default: "Описание не добавлено",         null: false
-    t.string   "cover_picture",   default: "/assets/images/book_title.jpg", null: false
+    t.string   "title",           default: "Название",           null: false
+    t.string   "author",          default: "Автор",               null: false
+    t.text     "description",      default: "Описание",         null: false
+    t.string   "cover_picture",   default: "book_title.jpg", null: false
     t.integer  "user_id"
-    t.string   "genre",           default: "Жанр не указан",                null: false
+    t.string   "genre",           default: "Жанр",                null: false
     t.boolean  "best_month",      default: false,                           null: false
     t.datetime "best_month_date"
     t.datetime "created_at",                                                null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170704143548) do
     t.string   "nickname"
     t.integer  "age"
     t.string   "email",                  default: "", null: false
-    t.string   "avatar"
+    t.string   "avatar", default: "book_title.jpg", null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false

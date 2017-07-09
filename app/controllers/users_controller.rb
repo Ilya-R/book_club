@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update(user_params)
+    if @user == current_user && @user.update(user_params)
       redirect_to @user, notice: 'Данные пользователя были успешно обновлены'
     else
       render :edit

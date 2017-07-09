@@ -16,7 +16,7 @@
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .footer {
@@ -24,9 +24,36 @@ body {
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 50px;
+    height: 30px;
     margin-bottom: 0
 }
 .powered{
     margin-left: 2%;
+}
+
+.cover_picture{
+    border-radius: 5%;
+    width: 250px;
+    height: auto
+}
+
+.book_title{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 5px
+}
+hr {
+    border: none;
+    background-color: #4b4f43;
+    color: #4b4f43;
+    height: 2px;
+}
+.com_body_right{
+   /* border-right: 1px solid #0001ff;*/
+    padding: 5px;
+}
+
+.com_header{
+    font-size: 12px;
+    margin-bottom: 0px;
 }

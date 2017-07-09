@@ -1,0 +1,62 @@
+<h2>Редактирование профиля</h2>
+<div class="col-md-4">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field" style='margin-top: 20px'>
+      <%= f.label :email %><br/>
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <div class="field" style='margin-top: 20px'>
+      <%= f.label 'Имя' %><br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field" style='margin-top: 20px'>
+      <%= f.label 'Псевдоним' %><br/>
+      <%= f.text_field :nickname %>
+    </div>
+
+    <div class="field" style='margin-top: 20px'>
+      <%= f.label 'Возраст' %><br/>
+      <%= f.text_field :age %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Сейчас ожидается подтверждение для: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="well" style='margin-top: 20px'>
+    <div class="field">
+      <%= f.label 'Новый пароль' %>
+      <p>(Оставьте эти поля пустыми если не хотите менять пароль)</p>
+      <%= f.password_field :password, autocomplete: "off" %>
+      <% if @minimum_password_length %>
+          <br/>
+          <em><%= @minimum_password_length %> знаков минимум</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label 'Подтвердите новый пароль' %><br/>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field">
+      <p>Введите текущий пароль для сохранения информации</p>
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить', class: 'btn btn-success btn-lg', style: 'margin-top: 10px' %>
+    </div>
+<% end %>
+
+<h3>Удалить аккаунт</h3>
+
+<p><%= button_to 'Удалить аккаунт', registration_path(resource_name), class: 'btn btn-danger btn-lg', data: {confirm: 'Вы точно хотите удалить аккаунт?'}, method: :delete %></p>
+
+<%= link_to "Назад", :back %>
+</div>

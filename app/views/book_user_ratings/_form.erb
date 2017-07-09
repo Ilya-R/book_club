@@ -1,0 +1,42 @@
+<h5>Рейтинг книги: <%= show_rating_score(@book) %> из 10. <%= ("Ваша оценка: #{@book.book_user_ratings.where(user: current_user).take.rating}") if user_signed_in? && @book.book_user_ratings.where(user: current_user).exists? %> </h5>
+
+<% x= user_signed_in? %>
+  <% y = @book.book_user_ratings.where(user: current_user).exists? %>
+
+
+<% if user_signed_in? && !@book.book_user_ratings.where(user: current_user).exists? %>
+    <%= form_for [@book, book_user_rating] do |f| %>
+
+        <%= f.label(:rating_1, '1') %>
+        <%= f.radio_button(:rating, '1') %>
+
+        <%= f.label(:rating_2, '2') %>
+        <%= f.radio_button(:rating, '2') %>
+
+        <%= f.label(:rating_3, '3') %>
+        <%= f.radio_button(:rating, '3') %>
+
+        <%= f.label(:rating_4, '4') %>
+        <%= f.radio_button(:rating, '4') %>
+
+        <%= f.label(:rating_5, '5') %>
+        <%= f.radio_button(:rating, '5') %>
+
+        <%= f.label(:rating_6, '6') %>
+        <%= f.radio_button(:rating, '6') %>
+
+        <%= f.label(:rating_7, '7') %>
+        <%= f.radio_button(:rating, '7') %>
+
+        <%= f.label(:rating_8, '8') %>
+        <%= f.radio_button(:rating, '8') %>
+
+        <%= f.label(:rating_9, '9') %>
+        <%= f.radio_button(:rating, '9') %>
+
+        <%= f.label(:rating_10, '10') %>
+        <%= f.radio_button(:rating, '10') %>
+
+        <%= f.submit 'Голосовать' %>
+    <% end %>
+<% end %>

@@ -6,11 +6,10 @@ class BookUserRatingsController < ApplicationController
     @new_book_user_rating = @book.book_user_ratings.build(book_user_rating_params)
     @new_book_user_rating.user = current_user
 
-    if can_current_user_rate?(@book_user_rating) && @new_book_user_rating.save
-      redirect_to @book, notice: 'Ваша оценка сохранена'
-    else
-      render @book, alert: 'Не удалось сохранить вашу оценку, возможно вы уже голосовали'
-      #render 'books#show', alert: 'Не удалось сохранить вашу оценку'
+   if can_user_rate?(@new_book_user_rating.book_id) && @new_book_user_rating.save
+         redirect_to @book, notice: 'Ваша оценка сохранена'
+   else
+     redirect_to @book, alert: 'Не удалось сохранить вашу оценку, возможно вы уже голосовали!'
     end
   end
 
@@ -37,6 +36,7 @@ class BookUserRatingsController < ApplicationController
   end
 
   def book_user_rating_params
-    params.fetch(:book_user_rating, {}).permit(:rating)
+    params.require(:book_user_rating).permit(:rating)
   end
+
 end

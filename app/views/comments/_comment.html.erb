@@ -1,0 +1,14 @@
+<div>
+  <p class="com_header">
+    <span> <%= link_to comment.user.name, comment.user %> </span>
+    <em> • <%= l comment.created_at, format: :short %></em>
+    <% if current_user == comment.user %>
+        <%= link_to(
+                fa_icon('trash'), book_comment_path(comment.book, comment),
+                method: :delete, data: {confirm: 'Удалить комментарий?'}
+            ) %>
+    <% end %>
+  </p>
+  <p class="well" style="padding: 5px;"><%= comment.body %></p>
+</div>
+

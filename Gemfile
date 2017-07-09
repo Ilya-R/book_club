@@ -8,6 +8,7 @@ gem 'rails_12factor'
 gem 'devise', '~> 4.2'
 gem 'devise-i18n'
 gem 'twitter-bootstrap-rails'
+gem 'russian'
 
 group :development, :test do
   gem 'sqlite3'

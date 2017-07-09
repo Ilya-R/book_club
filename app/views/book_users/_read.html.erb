@@ -1,0 +1,7 @@
+<li><%= link_to read.book.title, read.book %>
+  <% if current_user == read.user %>
+      <%= link_to(
+              fa_icon('trash'), book_book_user_path(read.book, read),
+              method: :delete, data: {confirm: 'Удалить книгу из списка?'}) %>
+  <% end %>
+</li>

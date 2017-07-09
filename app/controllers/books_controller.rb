@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: %i[show index main_page]
 
-  # задаем объект @event от текущего юзера
+  # задаем объект @book от текущего юзера
   before_action :set_current_user_book, only: %i[edit update]
 
   def main_page
@@ -17,8 +17,7 @@ class BooksController < ApplicationController
 
   def show
     @new_comment = @book.comments.build(params[:comment])
-    @book_rating = @book.book_user_ratings.build(params[:book_user_rating])
-    @book_list = @book.book_users.build(params[:book_user])
+    @book_rating = @book.book_user_ratings.build
   end
 
   # GET /books/new
@@ -47,6 +46,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def search
+
+  end
+
   private
 
   def set_book
@@ -54,7 +57,7 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :decription, :cover_picture, :genre)
+    params.require(:book).permit(:title, :author, :description, :cover_picture, :genre)
   end
 
   def set_current_user_book
@@ -65,19 +68,23 @@ class BooksController < ApplicationController
 
     book_with_scores_hash = {}
 
-    Books.all.each do |book|
+    Book.all.each do |book|
       score_array = []
       book.book_user_ratings.all.each {|rating| score_array << rating.rating }
 
       b = 0
-      average = (score_array.each {|i| b += i}) / score_array.size
+      score_array.each {|i| b += i}
+
+      average = 0
+      average = b / score_array.size unless score_array.empty?
+
       score = (book.book_user_ratings.size + book.comments.size) * average
 
       book_with_scores_hash[book] = score
     end
 
     max_value = 0
-    book_with_scores_hash.each_value {|value| max_value = value if value >> max_value}
+    book_with_scores_hash.each_value {|value| (max_value = value) if (value > max_value) }
 
     book_with_scores_hash.index(max_value)
   end

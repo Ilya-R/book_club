@@ -1,29 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
 
-<p>
-  <strong>Index:</strong>
-  <%= @book.index %>
-</p>
+    <div class="col-lg-6">
+      <%= image_tag @book.cover_picture, class: 'cover_picture' %>
 
-<p>
-  <strong>Edit:</strong>
-  <%= @book.edit %>
-</p>
-
-<p>
-  <strong>Show:</strong>
-  <%= @book.show %>
-</p>
-
-<p>
-  <strong>Create:</strong>
-  <%= @book.create %>
-</p>
-
-<p>
-  <strong>Update:</strong>
-  <%= @book.update %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+      <%= render partial: 'book_user_ratings/form', locals: {book_user_rating: @book_rating} %>
+      <% if user_signed_in? %>
+      <div class="well" style="margin-top: 10px">
+        <div class="row">
+          <div class="col-md-offset-3">
+            <%= link_to('Уже прочитано', book_book_users_path(@book, :book_user => {:list_type => "read"}), method: :post, class: "btn btn-default btn-lg") %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-3">
+            <%= link_to 'Хочу прочитать', book_book_users_path(@book, :book_user => {:list_type => "wish"}), method: :post, class: "btn btn-default btn-lg", style: "margin-top: 10px" %>
+          </div>
+        </div>
+        <% if @book.user == current_user %>
+            <div class="row">
+              <div class="col-md-offset-3">
+                <%= link_to 'Редактировать', edit_book_path, class: "btn btn-default btn-lg", style: "margin-top: 10px" %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+          <% end %>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="book_title">"<%= @book.title %>"</h2>
+      <h4 style="text-align: right"><%= @book.author %></h4>
+      <p><%= @book.description %></p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+   <%= render partial: 'comments/form', locals: {comment: @new_comment} %>
+  </div>
+</div>
+<div class="row" >
+<div class="buffer-both">
+  <div class="col-md-offset-3 col-md-6">
+    <hr/>
+  <%= render partial: 'comments/comment', collection: @book.comments.except(@new_comment) %>
+  </div>
+</div>
+</div>

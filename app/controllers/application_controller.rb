@@ -14,13 +14,11 @@ class ApplicationController < ActionController::Base
             (model.try(:book).present? && model.book.user == current_user))
   end
 
-  def can_current_user_rate?(model)
-    false if user_signed_in? &&
-        (Book_user_rating.where(user: current_user, book: model.book) == model)
+  def can_user_rate?(book_id)
+    true if user_signed_in? && !current_user.book_user_ratings.where(book_id: book_id).exists?
   end
 
-  def can_current_user_add?(model)
-    false if user_signed_in? &&
-        (Book_user.where(user: current_user, book: model.book, list_type: model.list_type) == model)
+  def can_current_user_add?(book_user)
+    true if user_signed_in? && !current_user.book_users.where(book_id: book_user.book_id, list_type: book_user.list_type).exists?
   end
 end
