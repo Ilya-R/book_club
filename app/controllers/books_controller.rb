@@ -40,14 +40,28 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
+      redirect_to @book, notice: 'Книга была отредактирована'
     else
-      render :edit
+      render :edit, alert: 'Не удалось отредактировать книгу'
     end
   end
 
-  def search
+  def search_title
+      @book_result = Book.where(title: params[:title]).take
+      if @book_result.present?
+        render :index
+      else
+        render :index
+      end
+  end
 
+  def search_author
+    @books_result = Book.where(title: params[:title]).all
+    if @books_result.empty?
+      render 'index'
+    else
+      render 'index'
+    end
   end
 
   private
@@ -89,10 +103,17 @@ class BooksController < ApplicationController
     book_with_scores_hash.index(max_value)
   end
 
+  def params_for_search_title
+    params.permit(:title)
+  end
+
+  def params_for_search_author
+    params.permit(:author)
+  end
+
   #При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.
   # Если несколько книг имеют одинаковый балл, выбирается та, которая добавлена позже всего.
   # Если и это одинаково, то книга выбирается случайно из набравших высший балл.
   #    В конкурсе учавствуют только книги с обложкой.
   #      Должно считаться раз в месяц.
 end
-

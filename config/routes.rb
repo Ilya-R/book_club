@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     delete '/book_users/:id', to: 'book_users#destroy'
   end
 
-  get 'search' => 'books#search'
+  get 'search_title' => 'books#search_title'
+  get 'search_author' => 'books#search_author'
 
   resources :books do
     resources :comments, only: %i[create destroy]
