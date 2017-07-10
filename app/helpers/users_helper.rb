@@ -27,7 +27,7 @@ module UsersHelper
     if user.avatar?
       user.avatar.url
     else
-      asset_path('book_title.jpg')
+      asset_path('user_avatar.jpg')
     end
   end
 end
