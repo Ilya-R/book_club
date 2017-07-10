@@ -22,4 +22,12 @@ module UsersHelper
       'Автор не оставил имени'
     end
   end
+
+  def user_avatar(user)
+    if user.avatar?
+      user.avatar.url
+    else
+      asset_path('book_title.jpg')
+    end
+  end
 end

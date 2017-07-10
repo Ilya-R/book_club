@@ -4,7 +4,7 @@
       <h4 style="margin-top: 0px; margin-bottom: 20px;">Книга "Выбор клуба":</h4>
       <div class="row">
         <div class="col-lg-5">
-          <%= image_tag @club_choice.cover_picture, class: 'cover_picture' %>
+          <%= image_tag book_cover(@club_choice), class: 'cover_picture' %>
           <h5>Рейтинг книги: <%= show_rating_score(@club_choice) %> из 10</h5>
         </div>
         <div class="col-lg-7">

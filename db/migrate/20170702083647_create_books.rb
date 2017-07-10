@@ -4,7 +4,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :title, null: false, default: 'Название'
       t.string :author, null: false, default: 'Автор'
       t.text :description, null: false, default: 'Описание'
-      t.string :cover_picture, null: false, default: 'book_title.jpg'
+      t.string :cover_picture
       t.references :user, index: true, foreign_key: true
       t.string :genre, null: false, default: 'Жанр'
       t.boolean :best_month, null: false, default: false

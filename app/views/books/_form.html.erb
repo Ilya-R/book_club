@@ -21,6 +21,12 @@
       <p><%= f.text_area :description, class: 'form-control' %></p>
     </div>
 
+    <div class="form-group">
+      <%= f.label 'Загрузите обложку' %>
+      <p><%= image_tag(@book.cover_picture.thumb.url) if @book.cover_picture? %></p>
+      <%= f.file_field :cover_picture %>
+    </div>
+
     <div class="actions">
       <%= f.submit 'Сохранить', class: 'btn btn-primary' %> или <%= link_to 'вернуться', :back %>
     </div>

@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :nickname
       t.integer :age
       t.string :email
-      t.string :avatar, null: false, default: 'book_title.jpg'
+      t.string :avatar
 
       t.timestamps null: false
     end

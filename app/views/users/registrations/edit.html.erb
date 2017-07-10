@@ -23,6 +23,12 @@
       <%= f.text_field :age %>
     </div>
 
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <p><%= image_tag(@user.avatar.thumb.url) if @user.avatar? %></p>
+        <%= f.file_field :avatar %>
+      </div>
+
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Сейчас ожидается подтверждение для: <%= resource.unconfirmed_email %></div>
     <% end %>

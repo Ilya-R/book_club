@@ -10,6 +10,8 @@ class Book < ActiveRecord::Base
   validates :description, length: { maximum: 1000 }
   validates :best_month, inclusion: { in: [true, false] }
   validates :title, :uniqueness => { :case_sansetive => false}
+
+  mount_uploader :cover_picture, AvatarUploader
 end
 
 

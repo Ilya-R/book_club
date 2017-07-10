@@ -14,6 +14,13 @@ module BooksHelper
     rating = 10 if rating == 10.0
     rating
   end
+  def book_cover(book)
+    if book.cover_picture?
+      book.cover_picture.url
+    else
+      asset_path('book_title.jpg')
+    end
+  end
 
 end
 
