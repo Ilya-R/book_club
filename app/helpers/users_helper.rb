@@ -12,4 +12,14 @@ module UsersHelper
       'Профиль'
     end
   end
+
+  def show_nickname_comments(comment)
+    if comment.user.nickname.present?
+      comment.user.nickname
+    elsif comment.user.name.present?
+      comment.user.name
+    else
+      'Автор не оставил имени'
+    end
+  end
 end

@@ -1,6 +1,6 @@
 <div>
   <p class="com_header">
-    <span> <%= link_to comment.user.name, comment.user %> </span>
+    <span> <%= link_to show_nickname_comments(comment), comment.user %> </span>
     <em> • <%= l comment.created_at, format: :short %></em>
     <% if current_user == comment.user %>
         <%= link_to(

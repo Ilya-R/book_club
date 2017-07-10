@@ -9,6 +9,11 @@ gem 'devise', '~> 4.2'
 gem 'devise-i18n'
 gem 'twitter-bootstrap-rails'
 gem 'russian'
+gem 'fog-google'
+gem 'google-api-client', '>= 0.6.2', '< 0.9'
+
+gem 'rmagick'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'sqlite3'
