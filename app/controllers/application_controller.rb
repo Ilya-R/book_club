@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def can_current_user_add?(book_user)
-    true if user_signed_in? && !current_user.book_users.where(book_id: book_user.book_id, list_type: book_user.list_type).exists?
+    true if user_signed_in? && !current_user.book_users.where(book_id: book_user.book_id, list_type: book_user.list_type).all.exists?
   end
 end
