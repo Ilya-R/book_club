@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_book, only: [:create, :destroy]
+  before_action :set_book, only: %i[create destroy]
   before_action :set_comment, only: [:destroy]
 
   def create
@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
       redirect_to @book, alert: 'Не удалось сохранить ваш комментарий'
     end
   end
-
 
   def destroy
     if current_user_can_edit?(@comment) && @comment.destroy

@@ -7,6 +7,6 @@ class BookUserRating < ActiveRecord::Base
   validates_uniqueness_of :rating, scope: :user_id
 
   def rating_in_range?
-    errors.add(:rating, 'Рейтинг должен быть от 1 до 10 включительно') unless (1..10).include?(rating)
+    errors.add(:rating, 'Рейтинг должен быть от 1 до 10 включительно') unless (1..10).cover?(rating)
   end
 end

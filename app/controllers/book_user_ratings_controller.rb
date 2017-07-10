@@ -1,6 +1,6 @@
 class BookUserRatingsController < ApplicationController
   before_action :set_book_user_rating, only: [:destroy]
-  before_action :set_book, only: [:create, :destroy]
+  before_action :set_book, only: %i[create destroy]
 
   def create
     @new_book_user_rating = @book.book_user_ratings.build(book_user_rating_params)
@@ -14,13 +14,12 @@ class BookUserRatingsController < ApplicationController
   end
 
   def destroy
-
-    message = {notice: 'Ваша оценка была удалена'}
+    message = { notice: 'Ваша оценка была удалена' }
 
     if current_user_can_edit?(@book_user_rating)
       @book_user_rating.destroy
     else
-      message = {alert: 'Не удалось удалить вашу оценку'}
+      message = { alert: 'Не удалось удалить вашу оценку' }
     end
     redirect_to @book, message
   end
@@ -38,5 +37,4 @@ class BookUserRatingsController < ApplicationController
   def book_user_rating_params
     params.require(:book_user_rating).permit(:rating)
   end
-
 end

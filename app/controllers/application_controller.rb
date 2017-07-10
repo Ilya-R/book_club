@@ -5,13 +5,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:password, :password_confirmation, :current_password])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[password password_confirmation current_password])
   end
 
   def current_user_can_edit?(model)
     user_signed_in? &&
-        (model.user == current_user ||
-            (model.try(:book).present? && model.book.user == current_user))
+      (model.user == current_user ||
+          (model.try(:book).present? && model.book.user == current_user))
   end
 
   def can_user_rate?(book_id)

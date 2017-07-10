@@ -3,7 +3,6 @@ Rails.application.routes.draw do
     registrations: 'registrations/registrations'
   }
 
-
   root 'books#main_page'
 
   resources :users, only: %i[show edit update] do

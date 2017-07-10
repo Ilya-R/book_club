@@ -1,5 +1,5 @@
 class BookUsersController < ApplicationController
-  before_action :set_book, only: [:create, :destroy]
+  before_action :set_book, only: %i[create destroy]
   before_action :set_book_user, only: [:destroy]
 
   def create
@@ -24,6 +24,7 @@ class BookUsersController < ApplicationController
   end
 
   private
+
   def set_book
     @book = Book.find(params[:book_id])
   end
@@ -35,5 +36,4 @@ class BookUsersController < ApplicationController
   def set_book_user
     @book_user = @book.book_users.find(params[:id])
   end
-
 end

@@ -9,5 +9,4 @@ class User < ActiveRecord::Base
   has_many :book_user_ratings
 
   mount_uploader :avatar, AvatarUploader
-
 end

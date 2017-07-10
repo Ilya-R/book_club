@@ -1,5 +1,4 @@
 class AvatarUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -33,12 +32,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
-  # Аватарку, загруженную пользователем, надо обрезать/уменьшить
-  # так, чтобы получился квадрат 400x400
   process resize_to_fill: [400, 400]
 
   # А потом нужно сделать миниатюрную версию 100x100
@@ -56,5 +49,4 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

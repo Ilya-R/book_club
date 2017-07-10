@@ -1,10 +1,8 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
-  # встроенный в девайз фильтр - посылает незалогиненного пользователя
   before_action :authenticate_user!, except: %i[show index main_page]
 
-  # задаем объект @book от текущего юзера
   before_action :set_current_user_book, only: %i[edit update]
 
   def main_page
@@ -25,8 +23,7 @@ class BooksController < ApplicationController
     @book = current_user.books.build
   end
 
-  def edit;
-  end
+  def edit; end
 
   def create
     @book = current_user.books.build(book_params)
@@ -47,12 +44,12 @@ class BooksController < ApplicationController
   end
 
   def search_title
-      @book_result = Book.where(title: params[:title]).take
-      if @book_result.present?
-        render :index
-      else
-        render :index
-      end
+    @book_result = Book.where(title: params[:title]).take
+    if @book_result.present?
+      render :index
+    else
+      render :index
+    end
   end
 
   def search_author
@@ -79,15 +76,14 @@ class BooksController < ApplicationController
   end
 
   def set_club_main_book
-
     book_with_scores_hash = {}
 
     Book.all.each do |book|
       score_array = []
-      book.book_user_ratings.all.each {|rating| score_array << rating.rating }
+      book.book_user_ratings.all.each { |rating| score_array << rating.rating }
 
       b = 0
-      score_array.each {|i| b += i}
+      score_array.each { |i| b += i }
 
       average = 0
       average = b / score_array.size unless score_array.empty?
@@ -98,7 +94,7 @@ class BooksController < ApplicationController
     end
 
     max_value = 0
-    book_with_scores_hash.each_value {|value| (max_value = value) if (value > max_value) }
+    book_with_scores_hash.each_value { |value| (max_value = value) if value > max_value }
 
     book_with_scores_hash.index(max_value)
   end
@@ -111,7 +107,7 @@ class BooksController < ApplicationController
     params.permit(:author)
   end
 
-  #При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.
+  # При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.
   # Если несколько книг имеют одинаковый балл, выбирается та, которая добавлена позже всего.
   # Если и это одинаково, то книга выбирается случайно из набравших высший балл.
   #    В конкурсе учавствуют только книги с обложкой.
