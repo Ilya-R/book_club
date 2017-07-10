@@ -136,6 +136,7 @@ GEM
       mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
     os (0.9.6)
+    pg (0.21.0)
     public_suffix (2.0.5)
     rack (1.6.5)
     rack-test (0.6.3)
@@ -217,6 +218,7 @@ DEPENDENCIES
   fog-google
   google-api-client (>= 0.6.2, < 0.9)
   jquery-rails
+  pg
   rails (= 4.2.8)
   rails_12factor
   rmagick
