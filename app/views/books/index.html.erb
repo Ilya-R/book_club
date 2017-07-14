@@ -1,25 +1,21 @@
- <% if !@books.present? && !@book_result.present? && !@books_result.present?%>
+ <% if !@books.present? && !@result.present? && !@results.present?%>
      <h2> Поиск не дал результатов </h2>
      <% end %>
 <h2 style="text-align: center">Поиск по книгам</h2>
 
 <div class="row">
-  <%= form_tag search_title_path, :method => 'GET' %>
-  <h4> Поиск по названию <%= text_field_tag :title %> <%= submit_tag 'Искать' %> </h4>
-
-
-  <%= form_tag search_author_path, :method => 'GET' %>
-  <h4> Поиск по автору <%= text_field_tag :author %> <%= submit_tag 'Искать' %></h4>
+  <%= form_tag search_path, :method => 'GET' %>
+  <h4> Название: <%= text_field_tag :title %> Автор: <%= text_field_tag :author %> <%= submit_tag 'Искать', class: "btn btn-default" %></h4>
 </div>
 
-<% if @book_result.present? %>
+<% if @result.present? %>
     <h3>Результат поиска:</h3>
-    <%= render @book_result %>
+    <%= render @result %>
 <% end %>
 
-<% if @books_result.present? %>
+<% if @results.present? %>
     <h3>Результат поиска:</h3>
-    <%= render partial: 'books/book', collection: @books_result %>
+    <%= render partial: 'books/book', collection: @results %>
 <% end %>
 
 

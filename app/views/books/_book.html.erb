@@ -1,5 +1,13 @@
-<div class="col-sm-6 col-md-4">
-        <h3><%= link_to book.title, book_path(book) %></h3>
-        <div><%= book.author %></div>
-</div>
+<div class="row" style="margin-bottom: 10px;">
+
+  <div class="col-md-1">
+    <%= image_tag cover_picture_thumb(book), class: 'thumbs' %>
+  </div>
+
+  <div class="col-md-6" style="margin-left: 10px">
+    <h3><%= link_to book.title, book_path(book) %></h3>
+    <%= book.author %>
+  </div>
+
+
 </div>

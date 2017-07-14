@@ -43,23 +43,19 @@ class BooksController < ApplicationController
     end
   end
 
-  def search_title
-    @book_result = Book.where(title: params[:title]).take
-    if @book_result.present?
-      render :index
+  def search
+    if params_for_search[:author] == ''
+      @result = Book.where(title: params_for_search[:title]).take
+    elsif params_for_search[:title] == ''
+      @results = Book.where(author: params_for_search[:author]).all
     else
-      render :index
+      @result = Book.where(title: params_for_search[:title], author: params_for_search[:author]).all
     end
+
+    render :index
+
   end
 
-  def search_author
-    @books_result = Book.where(title: params[:title]).all
-    if @books_result.empty?
-      render 'index'
-    else
-      render 'index'
-    end
-  end
 
   private
 
@@ -99,12 +95,8 @@ class BooksController < ApplicationController
     book_with_scores_hash.index(max_value)
   end
 
-  def params_for_search_title
-    params.permit(:title)
-  end
-
-  def params_for_search_author
-    params.permit(:author)
+  def params_for_search
+    params.permit(:title, :author)
   end
 
   # При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.

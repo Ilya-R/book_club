@@ -1,47 +1,48 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-7">
-      <h4 style="margin-top: 0px; margin-bottom: 20px;">Книга "Выбор клуба":</h4>
-      <div class="row">
-        <div class="col-lg-5">
-          <%= image_tag book_cover(@club_choice), class: 'cover_picture' %>
-          <h5>Рейтинг книги: <%= show_rating_score(@club_choice) %> из 10</h5>
-        </div>
-        <div class="col-lg-7">
-          <h2 class="book_title">"<%= @club_choice.title %>"</h2>
-          <h4 style="text-align: right"><%= @club_choice.author %></h4>
-          <p><%= @club_choice.description %></p>
-          <p style="text-align: right"> <%= link_to "Подробнее>>", book_path(@club_choice) %> </p>
-        </div>
+<div class="row">
+
+  <div class="col-lg-8">
+    <h4 style="margin-top: 0px; margin-bottom: 20px;">Книга "Выбор клуба":</h4>
+    <div class="row">
+      <div class="col-lg-5">
+        <%= image_tag book_cover(@club_choice), class: 'cover_picture' %>
+        <h5>Рейтинг книги: <%= show_rating_score(@club_choice) %> из 10</h5>
       </div>
-
-
-    </div>
-    <div class="col-lg-5">
-      <div class="well">
-        <h3 style="text-align: left; margin-top: 0px; margin-left: 1%">Знаете отличную книгу?</h3>
-        <h4 style="text-align: right; margin-right: 15%;">Поделитесь с другими!</h4>
-
-
-        <div class="container">
-          <div class="row">
-
-            <div class="row">
-              <div class="col-md-offset-2">
-                <%= link_to 'Добавить книгу', new_book_path, class: "btn btn-default btn-lg" %>
-              </div>
-            </div>
-            <h3 style="text-align: left; margin-top: 5%; margin-left: 0%">Или посмотрите список книг на сайте!</h3>
-            <div class="row">
-              <div class="col-md-offset-2">
-                <%= link_to 'Смотреть список', books_path, class: "btn btn-default btn-lg", style: "marging-left: 20px" %>
-              </div>
-            </div>
-
-          </div>
-        </div>
+      <div class="col-lg-7">
+        <h2 class="book_title">"<%= @club_choice.title %>"</h2>
+        <h4 style="text-align: left"><%= @club_choice.author %></h4>
+        <p><%= @club_choice.description %></p>
+        <p style="text-align: right"> <%= link_to 'Подробнее>>', book_path(@club_choice) %> </p>
       </div>
     </div>
   </div>
+
+
+  <div class="col-md-4">
+
+    <div class="well">
+      <div class="row">
+
+      <h3 style="text-align: left; margin-top: 0px; margin-left: 1%">Знаете отличную книгу?</h3>
+      <h4 style="text-align: right; margin-right: 15%;">Поделитесь с другими!</h4>
+
+
+
+
+        <div class="row">
+          <div class="col-md-offset-6">
+            <%= link_to 'Добавить книгу', new_book_path, class: "btn btn-default btn-lg" %>
+          </div>
+        </div>
+
+        <h3 style="text-align: right; margin-right: 10px"><%= link_to 'Cписок книг', books_path %></h3>
+
+
+      </div>
+    </div>
+
+
+  </div>
 </div>
+
+
 

@@ -1,49 +1,64 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
 
-    <div class="col-lg-6">
-      <%= image_tag book_cover(@book), class: 'cover_picture' %>
-
-      <%= render partial: 'book_user_ratings/form', locals: {book_user_rating: @book_rating} %>
-      <% if user_signed_in? %>
-      <div class="well" style="margin-top: 10px">
-        <div class="row">
-          <div class="col-md-offset-3">
-            <%= link_to('Уже прочитано', book_book_users_path(@book, :book_user => {:list_type => "read"}), method: :post, class: "btn btn-default btn-lg") %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-offset-3">
-            <%= link_to 'Хочу прочитать', book_book_users_path(@book, :book_user => {:list_type => "wish"}), method: :post, class: "btn btn-default btn-lg", style: "margin-top: 10px" %>
-          </div>
-        </div>
-        <% if @book.user == current_user %>
-            <div class="row">
-              <div class="col-md-offset-3">
-                <%= link_to 'Редактировать', edit_book_path, class: "btn btn-default btn-lg", style: "margin-top: 10px" %>
-              </div>
-            </div>
-        <% end %>
-      </div>
-          <% end %>
-    </div>
-    <div class="col-lg-6">
-      <h2 class="book_title">"<%= @book.title %>"</h2>
-      <h4 style="text-align: right"><%= @book.author %></h4>
-      <p><%= @book.description %></p>
-    </div>
+  <div class="col-md-4">
+    <%= image_tag book_cover(@book), class: 'cover_picture' %>
   </div>
+
+  <div class="col-md-8">
+    <h2 class="book_title">"<%= @book.title %>"</h2>
+    <h4 style="text-align: left"><%= @book.author %></h4>
+    <p><%= @book.description %></p>
+  </div>
+
 </div>
+
 <div class="row">
-  <div class="col-md-offset-3 col-md-6">
-   <%= render partial: 'comments/form', locals: {comment: @new_comment} %>
+
+  <div class="col-md-6">
+    <%= render partial: 'book_user_ratings/form', locals: {book_user_rating: @book_rating} %>
   </div>
-</div>
-<div class="row" >
-<div class="buffer-both">
-  <div class="col-md-offset-3 col-md-6">
-    <hr/>
-  <%= render partial: 'comments/comment', collection: @book.comments.except(@new_comment) %>
+  <div class="col-md-4 col-md-offset-2">
+    <h5 style="text-align: right;">Книга добавлена: <%= link_to @book.user.nickname, @book.user %></h5>
   </div>
+
+
 </div>
+
+
+<div class="row" style="padding-left: 15px; margin-top: 20px">
+
+  <div class="col-md-8">
+    <div class="row">
+      <%= render partial: 'comments/form', locals: {comment: @new_comment} %>
+    </div>
+
+    <div class="row">
+      <hr/>
+      <%= render partial: 'comments/comment', collection: @book.comments.except(@new_comment) %>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <% if user_signed_in? %>
+        <div class="well" style="margin-top: 10px">
+          <div class="row">
+            <div class="col-md-offset-1">
+              <%= link_to('Уже прочитано', book_book_users_path(@book, :book_user => {:list_type => "read"}), method: :post, class: "btn btn-default") %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-offset-1">
+              <%= link_to 'Хочу прочитать', book_book_users_path(@book, :book_user => {:list_type => "wish"}), method: :post, class: "btn btn-default", style: "margin-top: 10px" %>
+            </div>
+          </div>
+          <% if @book.user == current_user %>
+              <div class="row">
+                <div class="col-md-offset-1">
+                  <%= link_to 'Редактировать', edit_book_path, class: "btn btn-default", style: "margin-top: 10px" %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
 </div>

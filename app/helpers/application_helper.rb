@@ -10,6 +10,14 @@ module ApplicationHelper
   # </div>
   # </footer>
 
+  def cover_picture_thumb(book)
+    if book.cover_picture.file.present?
+      book.cover_picture.thumb.url
+    else
+      asset_path('book_title')
+    end
+  end
+
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
