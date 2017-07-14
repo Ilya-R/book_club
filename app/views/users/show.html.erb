@@ -12,9 +12,11 @@
         <h4>Имя: <%= @user.name %></h4>
         <h4>Возраст: <%= @user.age %> </h4>
         <h4>На сайте с: <%= l @user.created_at, format: :long %> </h4>
-        <div class="col-md-offset-5">
-          <%= link_to 'Редактировать', edit_user_registration_path, class: "btn btn-success btn-lg", style: "margin-top: 100px" %>
+        <div>
+          <%= link_to 'Редактировать', edit_user_registration_path, class: "btn btn-success btn-lg"%>
         </div>
+
+
       </div>
     </div>
 
