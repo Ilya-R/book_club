@@ -14,7 +14,7 @@ module ApplicationHelper
     if book.cover_picture.file.present?
       book.cover_picture.thumb.url
     else
-      asset_path('book_title')
+      asset_path('thumb_book_title.jpg')
     end
   end
 
