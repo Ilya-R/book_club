@@ -109,7 +109,7 @@ class BooksController < ApplicationController
     books_with_scores = {}
     Book.all.each do |book|
       total_rating = 0
-      book.book_user_ratings.all.each {|x| total_rating += x.rating}
+      book.book_user_ratings.all.each {|x| (total_rating += x.rating)/book.book_user_ratings.all.size}
       books_with_scores[book] = total_rating
     end
     ind = 0
