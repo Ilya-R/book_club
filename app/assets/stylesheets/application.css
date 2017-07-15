@@ -60,3 +60,9 @@ hr {
 .thumbs{
     border-radius: 5%;
 }
+
+.avatar_thumbs{
+    height: 30px;
+    width: auto;
+    border-radius: 5%;
+}

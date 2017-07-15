@@ -1,0 +1,12 @@
+<div class="row" style="margin-bottom: 10px;">
+
+  <div class="col-md-1">
+    <%= image_tag cover_picture_thumb(main_book), class: 'avatar_thumbs' %>
+  </div>
+
+  <div class="col-md-9" style="margin-left: 10px">
+    <h5><%= link_to main_book.title, book_path(main_book) %></h5>
+  </div>
+
+
+</div>

@@ -7,6 +7,9 @@ class BooksController < ApplicationController
 
   def main_page
     @club_choice = set_club_main_book
+    @new_clubers = User.last(10)
+    @new_books = Book.last(10)
+    @top_books = main_rating
   end
 
   def index
@@ -30,6 +33,9 @@ class BooksController < ApplicationController
 
     if @book.save
       redirect_to @book, notice: 'Книга была успешно добавлена'
+    elsif Book.where(title: @book.title).take.present?
+      @book = Book.where(title: @book.title).take
+      redirect_to @book, notice: 'Книга уже существует на сайте'
     else
       render :new
     end
@@ -97,6 +103,24 @@ class BooksController < ApplicationController
 
   def params_for_search
     params.permit(:title, :author)
+  end
+
+  def main_rating
+    books_with_scores = {}
+    Book.all.each do |book|
+      total_rating = 0
+      book.book_user_ratings.all.each {|x| total_rating += x.rating}
+      books_with_scores[book] = total_rating
+    end
+    ind = 0
+    ten_books = {}
+    books_with_scores.sort.sort_by { |elem| elem[1] }.reverse.each_with_index do |val,index|
+      if index == ind && ind <= 10
+        ind += 1
+        ten_books[index] = val[0]
+      end
+    end
+    ten_books
   end
 
   # При большом колличестве книг это позиция выбирается по формуле (голоса+комменты)*средний балл.

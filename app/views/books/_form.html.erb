@@ -3,22 +3,17 @@
 
     <div class="form-group">
       <%= f.label 'Название' %>
-      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.text_field :title, class: 'form-control', :value=>'', :data =>{:title=>'Введите название книги', :toggle=>'tooltip', :placement=>'right'} %>
     </div>
 
     <div class="form-group">
       <%= f.label 'Автор' %>
-      <%= f.text_field :author, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label 'Жанр' %>
-      <%= f.text_field :genre, class: 'form-control' %>
+      <%= f.text_field :author, class: 'form-control', :value=>'', :data =>{:title=>'Введите автора книги', :toggle=>'tooltip', :placement=>'right'} %>
     </div>
 
     <div class="form-group">
       <%= f.label 'Описание' %>
-      <p><%= f.text_area :description, class: 'form-control' %></p>
+      <p><%= f.text_area :description, class: 'form-control', :value=>'', :data =>{:title=>'Введите описание книги', :toggle=>'tooltip', :placement=>'right'} %></p>
     </div>
 
     <div class="form-group">
