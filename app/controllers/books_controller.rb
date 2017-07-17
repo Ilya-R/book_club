@@ -50,7 +50,7 @@ class BooksController < ApplicationController
   end
 
   def search
-    @results = Character.search_everywhere(params[:query])
+    @results = Book.search_everywhere(params[:query])
     render :index
   end
 
@@ -94,7 +94,7 @@ class BooksController < ApplicationController
   end
 
   def params_for_search
-    params.permit(:title, :author)
+    params.permit(:query)
   end
 
   def main_rating
