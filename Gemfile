@@ -16,6 +16,7 @@ gem 'carrierwave'
 gem 'rmagick'
 
 group :production do
+  gem 'pg_search'
   gem 'pg'
 end
 

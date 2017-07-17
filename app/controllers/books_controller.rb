@@ -50,16 +50,8 @@ class BooksController < ApplicationController
   end
 
   def search
-    if params_for_search[:author] == ''
-      @result = Book.where(title: params_for_search[:title]).take
-    elsif params_for_search[:title] == ''
-      @results = Book.where(author: params_for_search[:author]).all
-    else
-      @result = Book.where(title: params_for_search[:title], author: params_for_search[:author]).all
-    end
-
+    @results = Character.search_everywhere(params[:query])
     render :index
-
   end
 
 

@@ -4,6 +4,9 @@ class Book < ActiveRecord::Base
   has_many :book_users
   has_many :book_user_ratings
 
+  include PgSearch
+  pg_search_scope :search_everywhere, against: [:title, :author, :discription]
+
   validates :title, :author, :description, :genre, :user_id, presence: true
   validates :title, length: { maximum: 50 }
   validates :author, length: { maximum: 40 }
