@@ -109,7 +109,7 @@ class BooksController < ApplicationController
     ind = 0
     ten_books = {}
     books_with_scores.sort.sort_by { |elem| elem[1] }.reverse.each_with_index do |val,index|
-      if index == ind && ind <= 10
+      if index == ind && ind <= 9
         ind += 1
         ten_books[index] = val[0]
       end
