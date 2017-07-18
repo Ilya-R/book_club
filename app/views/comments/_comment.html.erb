@@ -1,7 +1,7 @@
 <div>
   <p class="com_header">
     <span> <%= link_to show_nickname_comments(comment), comment.user %> </span>
-    <em> • <%= l comment.created_at, format: :short %></em>
+    <em> • <%= Russian::strftime(comment.created_at, '%-d.%-m.%Y') %></em>
     <% if current_user == comment.user %>
         <%= link_to(
                 fa_icon('trash'), book_comment_path(comment.book, comment),
