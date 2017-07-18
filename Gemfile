@@ -18,6 +18,7 @@ gem 'rmagick'
 group :production do
   gem 'pg_search'
   gem 'pg'
+  gem 'texticle'
 end
 
 group :development, :test do
