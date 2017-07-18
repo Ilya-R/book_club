@@ -14,11 +14,11 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'carrierwave'
 gem 'rmagick'
+gem 'pg_search'
+gem 'texticle'
 
 group :production do
-  gem 'pg_search'
   gem 'pg'
-  gem 'texticle'
 end
 
 group :development, :test do

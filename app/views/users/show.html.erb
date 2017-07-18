@@ -1,61 +1,64 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
 
+  <div class="col-md-3">
     <div class="row">
-      <div class="col-lg-5">
-        <h3>Профиль пользователя</h3>
-        <%= image_tag user_avatar(@user), class: 'cover_picture' %>
-      </div>
-      <div class="col-lg-5">
-
-        <h3 style="color:#0004FF; margin-bottom: 20px"><%= @user.nickname %></h3>
-        <h4>Имя: <%= @user.name %></h4>
-        <h4>Возраст: <%= @user.age %> </h4>
-        <h4>На сайте с: <%= l @user.created_at, format: :long %> </h4>
-        <div>
-          <%= link_to 'Редактировать', edit_user_registration_path, class: "btn btn-success btn-lg"%>
-        </div>
-
-
+      <%= image_tag user_avatar(@user), class: 'profile_avatar' %>
+      <h3 style="color:#0004FF"><%= @user.nickname %></h3>
+      <h5>Имя: <%= @user.name %></h5>
+      <h5>На сайте с: <%= Russian::strftime(@user.created_at, '%-d.%-m.%Y') %> </h5>
+      <div>
+        <%= link_to 'Редактировать', edit_user_registration_path, class: 'btn btn-success btn-sm' %>
       </div>
     </div>
 
-    <hr/>
-
     <div class="row">
-      <div class="col-md-4 com_body_right">
-        <h3>Хочет прочитать:</h3>
-        <ul type="disc">
-          <% if @user.book_users.where(list_type: 'wish').any? %>
-              <%= render partial: 'book_users/wish', collection: @user.book_users.where(list_type: 'wish').all %>
-              </ul>
-          <% else %>
-              <p>Список пуст</p>
-          <% end %>
-          </div>
-      <div class="col-md-4 com_body_right">
-        <h3>Прочитал:</h3>
-        <% if @user.book_users.where(list_type: 'read').any? %>
-            <ul type="disc">
-              <%= render partial: 'book_users/read', collection: @user.book_users.where(list_type: 'read') %>
-            </ul>
-        <% else %>
-            <p>Список пуст</p>
-        <% end %>
-      </div>
-      <div class="col-md-4">
-        <h3>Добавил:</h3>
-        <% if @user.books.any? %>
-            <ul type="disc">
-              <%= render partial: 'partials/added_book', collection: @user.books %>
-            </ul>
-        <% else %>
-            <p>Нет добавленных книг</p>
-        <% end %>
-
-      </div>
-
-
+      <h4>Добавил <%= count_add_books(@user) %>:</h4>
+      <% if @user.books.any? %>
+          <ul type="disc">
+            <%= render partial: 'partials/added_book', collection: @user.books %>
+          </ul>
+      <% else %>
+          <p>Нет добавленных книг</p>
+      <% end %>
     </div>
   </div>
+
+
+  <div class="col-md-3">
+    <h4>Хочет прочитать<%= count_list_books(@user, 'wish') %>:</h4>
+    <ul type="disc">
+      <% if @user.book_users.where(list_type: 'wish').any? %>
+          <%= render partial: 'book_users/wish', collection: @user.book_users.where(list_type: 'wish').all %>
+          </ul>
+      <% else %>
+          <p>Список пуст</p>
+      <% end %>
+      </div>
+
+
+  <div class="col-md-3">
+    <h4>Прочитал<%= count_list_books(@user, 'read') %>:</h4>
+    <% if @user.book_users.where(list_type: 'read').any? %>
+        <ul type="disc">
+          <%= render partial: 'book_users/read', collection: @user.book_users.where(list_type: 'read') %>
+        </ul>
+    <% else %>
+        <p>Список пуст</p>
+    <% end %>
+  </div>
+
+
+  <div class="col-md-3">
+    <h4>Обсуждает<%= count_discuss_books(@user) %>:</h4>
+    <% if @user.comments.any? %>
+        <ul type="disc">
+          <%= render partial: 'partials/added_book', collection: return_discuss_books(@user) %>
+        </ul>
+    <% else %>
+        <p>Не обсуждает книги</p>
+    <% end %>
+
+  </div>
+
 </div>
+

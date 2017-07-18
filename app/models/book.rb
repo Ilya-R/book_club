@@ -16,6 +16,8 @@ class Book < ActiveRecord::Base
     end
   end
 
+
+
   validates :title, :author, :description, :genre, :user_id, presence: true
   validates :title, length: { maximum: 50 }
   validates :author, length: { maximum: 40 }
