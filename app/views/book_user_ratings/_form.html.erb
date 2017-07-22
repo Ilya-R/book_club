@@ -1,38 +1,65 @@
-<h5>Рейтинг книги: <%= show_rating_score(@book) %> из 10. <%= ("Ваша оценка: #{@book.book_user_ratings.where(user: current_user).take.rating}") if user_signed_in? && @book.book_user_ratings.where(user: current_user).exists? %> </h5>
+<h5>Рейтинг книги: <%= show_rating_score(@book) %> из
+  10. <%= ("Ваша оценка: #{@book.book_user_ratings.where(user: current_user).take.rating}") if user_signed_in? && @book.book_user_ratings.where(user: current_user).exists? %> </h5>
 
 <% if user_signed_in? && !@book.book_user_ratings.where(user: current_user).exists? %>
+
     <%= form_for [@book, book_user_rating] do |f| %>
 
-        <%= f.label(:rating_1, '1') %>
-        <%= f.radio_button(:rating, '1') %>
+        <div class="btn-group" data-toggle="buttons">
 
-        <%= f.label(:rating_2, '2') %>
-        <%= f.radio_button(:rating, '2') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '1') %>
+            1
+          </label>
 
-        <%= f.label(:rating_3, '3') %>
-        <%= f.radio_button(:rating, '3') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '2') %>
+            2
+          </label>
 
-        <%= f.label(:rating_4, '4') %>
-        <%= f.radio_button(:rating, '4') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '3') %>
+            3
+          </label>
 
-        <%= f.label(:rating_5, '5') %>
-        <%= f.radio_button(:rating, '5') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '4') %>
+            4
+          </label>
 
-        <%= f.label(:rating_6, '6') %>
-        <%= f.radio_button(:rating, '6') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '5') %>
+            5
+          </label>
 
-        <%= f.label(:rating_7, '7') %>
-        <%= f.radio_button(:rating, '7') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '6') %>
+            6
+          </label>
 
-        <%= f.label(:rating_8, '8') %>
-        <%= f.radio_button(:rating, '8') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '7') %>
+            7
+          </label>
 
-        <%= f.label(:rating_9, '9') %>
-        <%= f.radio_button(:rating, '9') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '8') %>
+            8
+          </label>
 
-        <%= f.label(:rating_10, '10') %>
-        <%= f.radio_button(:rating, '10') %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '9') %>
+            9
+          </label>
 
-        <%= f.submit 'Голосовать' %>
+          <label class="btn btn-warning btn-sm">
+            <%= f.radio_button(:rating, '10') %>
+            10
+          </label>
+        </div>
+
+        <%= f.submit 'Голосовать', class: 'btn btn-secondary  btn-sm' %>
+
     <% end %>
+
 <% end %>
