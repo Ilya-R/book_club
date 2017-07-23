@@ -7,7 +7,7 @@
     <span><%= link_to commented_book.title, book_path(commented_book) %></span>
     <div>
       <% if commented_book.book_user_ratings.where(user: current_user).present? %>
-          Оценил на <%= commented_book.where(user: current_user).take.rating.to_s %>  <i class="fa fa-star" aria-hidden="true"></i>
+          Оценил на <%= commented_book.book_user_ratings.where(user: current_user).take.rating.to_s %>  <i class="fa fa-star" aria-hidden="true"></i>
       <%else%>
           Не оставил оценку
       <% end %>
