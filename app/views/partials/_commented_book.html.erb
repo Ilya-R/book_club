@@ -1,0 +1,16 @@
+<div class="row" style="margin-top: 10px">
+  <div class="col-sm-1">
+    <%= image_tag cover_picture_thumb(commented_book), class: 'thumbs_small' %>
+  </div>
+
+  <div class="col-sm-10" style="margin-left: 10px">
+    <span><%= link_to commented_book.title, book_path(commented_book) %></span>
+    <div>
+      <% if commented_book.book_user_ratings.where(user: current_user).present? %>
+          Оценил на <%= commented_book.where(user: current_user).take.rating.to_s %>  <i class="fa fa-star" aria-hidden="true"></i>
+      <%else%>
+          Не оставил оценку
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="col-md-5">
+  <h2>Редактирование профиля</h2>
+  <div class="well" style='margin-top: 20px'>
+    <%= form_for @user do |f| %>
+
+        <div class="form-group" >
+          <%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+
+        <div class="form-group" style='margin-top: 20px'>
+          <%= f.label 'Имя' %><br/>
+          <%= f.text_field :name %>
+        </div>
+
+        <div class="form-group" style='margin-top: 20px'>
+          <%= f.label 'Псевдоним' %><br/>
+          <%= f.text_field :nickname %>
+        </div>
+
+        <div class="form-group" style='margin-top: 20px'>
+          <%= f.label 'Год рождения' %><br/>
+          <%= f.text_field :age %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label 'Ваше фото' %>
+          <p><%= image_tag(@user.avatar.thumb.url) if @user.avatar? %></p>
+
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <label class="input-group-btn">
+                    <span class="btn btn-primary">
+                        Открыть&hellip; <%= f.file_field :avatar, style:'display:none' %>
+                    </span>
+            </label>
+            <input type="text" class="form-control" readonly>
+          </div>
+        </div>
+
+
+
+
+        <div class="actions">
+          <%= f.submit 'Сохранить', class: 'btn btn-success', style: 'margin-top: 10px' %>
+        </div>
+    <% end %>
+
+  </div>
+
+  <%= link_to 'Изменить пароль', edit_user_registration_path, class: 'btn btn-warning btn-sm' %> или
+
+  <%= link_to 'Вернуться назад', :back, class: 'btn btn-default btn-sm' %>
+</div>

@@ -1,7 +1,22 @@
-<li><%= link_to read.book.title, read.book %>
-  <% if current_user == read.user %>
-      <%= link_to(
-              fa_icon('trash'), book_book_user_path(read.book, read),
-              method: :delete, data: {confirm: 'Удалить книгу из списка?'}) %>
+<div class="row" style="margin-top: 10px">
+  <div class="col-sm-1">
+    <%= image_tag cover_picture_thumb(read.book), class: 'thumbs_small' %>
+  </div>
+
+  <div class="col-sm-10" style="margin-left: 10px">
+    <span><%= link_to read.book.title, book_path(read.book) %></span>
+    <% if current_user == read.user %>
+        <%= link_to(
+                fa_icon('trash'), book_book_user_path(read.book, read),
+                method: :delete, data: {confirm: 'Удалить книгу из списка?'}) %>
+    <% end %>
+
+  <div>
+  <% if read.book.book_user_ratings.where(user: current_user).present? %>
+   Оценил на <%= read.book.book_user_ratings.where(user: current_user).take.rating.to_s %>  <i class="fa fa-star" aria-hidden="true"></i>
+ <%else%>
+    Не оставил оценку
   <% end %>
-</li>
+    </div>
+  </div>
+</div>

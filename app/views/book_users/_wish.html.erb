@@ -1,7 +1,15 @@
-<li><%= link_to wish.book.title, wish.book %>
-  <% if current_user == wish.user %>
-      <%= link_to(
-              fa_icon('trash'), book_book_user_path(wish.book, wish),
-              method: :delete, data: {confirm: 'Удалить книгу из списка?'}) %>
-  <% end %>
-</li>
+<div class="row" style="margin-top: 10px">
+  <div class="col-md-1">
+    <%= image_tag cover_picture_thumb(wish.book), class: 'thumbs_small' %>
+  </div>
+
+  <div class="col-md-10" style="margin-top: 10px; margin-left: 10px">
+    <span><%= link_to wish.book.title, book_path(wish.book) %></span>
+    <% if current_user == wish.user %>
+        <%= link_to(
+                fa_icon('trash'), book_book_user_path(wish.book, wish),
+                method: :delete, data: {confirm: 'Удалить книгу из списка?'}) %>
+    <% end %>
+
+  </div>
+</div>

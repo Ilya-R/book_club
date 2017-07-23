@@ -1,1 +1,9 @@
-<li><%= link_to added_book.title, added_book %></li>
+<div class="row" style="margin-top: 10px">
+  <div class="col-md-1">
+    <%= image_tag cover_picture_thumb(added_book), class: 'thumbs_small' %>
+  </div>
+
+  <div class="col-md-10" style="margin-top: 10px; margin-left: 10px">
+    <%= link_to added_book.title, book_path(added_book) %>
+  </div>
+</div>
