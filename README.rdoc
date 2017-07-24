@@ -17,6 +17,7 @@
 git clone https://github.com/Ilya-R/book_club.git
 
 sudo aptitude install imagemagick libmagickwand-dev
+
 bundle install --without development test
 
 bundle exec rake db:migrate
