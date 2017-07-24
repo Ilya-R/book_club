@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show]
 
-  before_action :authenticate_user!, except: %i[show index main_page]
+  before_action :authenticate_user!, except: %i[show index main_page search]
 
   before_action :set_current_user_book, only: %i[edit update]
 
