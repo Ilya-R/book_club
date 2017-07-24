@@ -1,12 +1,6 @@
 <% if !@books.present? && !@results.present? %>
     <h2> Поиск не дал результатов </h2>
 <% end %>
-<h2 style="text-align: center">Поиск по книгам</h2>
-
-<div class="row">
-  <%= form_tag search_path, :method => 'GET' %>
-  <h4><%= text_field_tag :query %> <%= submit_tag 'Искать', class: "btn btn-default" %></h4>
-</div>
 
 <% if @results.present? %>
     <h3>Результаты поиска по запросу <em><%= params[:query] %></em></h3>
