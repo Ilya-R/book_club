@@ -3,7 +3,7 @@
 <% end %>
 
 <% if @results.present? %>
-    <h3>Результаты поиска по запросу <em><%= params[:query] %></em></h3>
+    <h3>Результаты поиска по запросу <em>"<%= params[:query] %>"</em></h3>
     <%= render partial: 'books/book', collection: @results %>
 <% end %>
 

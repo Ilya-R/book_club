@@ -1,28 +1,25 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+==Сайт "Книжный клуб"
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Сайт на RoR для обсуждения книг.
+В приложении можно добавить добавить нового пользователя (посредством devise),
+добавить книгу, написать комментарии к ней, добавить книгу в списки: Прочитано, Хочу прочитать.
+Реализована функция голосования за книги, и отображение их рейтинга.
+На главной отображается книга "выбор клуба"( определяется по формуле "(голоса+комменты)*средний балл).
+Полнотекстовый поиск с помощью гема pg_search. Соответственно следует использовать PostgreSQL
+или переделывать поиск. На девелопменте поиск не работает.
+
+Хранение загружаемых файлов настроено на Google storage через carrierwave.
+
+
+Команды:
+
+git clone https://github.com/Ilya-R/book_club.git
+
+sudo aptitude install imagemagick libmagickwand-dev
+bundle install --without development test
+
+bundle exec rake db:migrate
+
+rails s
+
